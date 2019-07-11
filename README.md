@@ -49,22 +49,24 @@ inc/armPA.ipp contains the pool allocator code.
    WARNING: Slow execution
 
     Usage: (allocating int data type)
+```C++
       PoolAlloc poolAl;
       poolAl.CreatePool<int>();                       ...     (1)
       int* ptr = poolAl.Allocate<int>();              ...     (2)
       poolAl.Deallocate(ptr);                         ...     (3)
       poolAl.DeletePool<int>();                       ...     (4)
-
+```
 2. OPTIMIZED_FOR_SPEED: This is the default implementation and is optimized for speed. 
     (To use this implementation, comment #define OPTIMIZED_FOR_SIZE in this file)
 
     Usage: (allocating int data type)
+```C++
       PoolAlloc poolAl;
       const void* int_h = poolAl.CreatePool<int>();   ...     (5)
       int* ptr = poolAl.Allocate<int>(&int_h);        ...     (6)
       poolAl.Deallocate(&int_h, ptr);                 ...     (7)
       poolAl.DeletePool<int>(&int_h);                 ...     (8)
-
+```
 
      (1) & (5)     Creating a pool allocator
      (2) & (6)     Allocating in an existing pool
